@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import { Form, Button } from "semantic-ui-react";
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import { useForm } from "../util/hooks";
 
 const Login = props => {
-  const [errors, setErrors] = useState({
-    username: "",
-    password: ""
-  });
+  const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values } = useForm(loginUserCallBack, {
     username: "",
     password: ""
   });
 
-  const [loginUser, { loading }] = useQuery(LOGIN_USER, {
-    update(proxy, result) {
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+    update(_, result) {
       props.history.push("/");
     },
     onError(err) {
@@ -70,7 +67,7 @@ const Login = props => {
 };
 
 const LOGIN_USER = gql`
-  query login($username: String!, $password: String!) {
+  mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
       id
       email
