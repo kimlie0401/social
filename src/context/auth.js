@@ -1,4 +1,16 @@
 import React, { useReducer, createContext } from "react";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
+
+const initialState = { user: null };
+
+if (Cookies.getJSON("jwtToken")) {
+  const decodedToken = jwtDecode(Cookies.getJSON("jwtToken"));
+  if (decodedToken.exp * 1000 < Date.now()) {
+    Cookies.remove("jwtToken");
+  }
+  initialState.user = decodedToken;
+}
 
 const AuthContext = createContext({
   user: null,
@@ -25,9 +37,11 @@ const authReducer = (state, action) => {
 };
 
 const AuthProvider = props => {
-  const [state, dispatch] = useReducer(authReducer, { user: null });
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
   const login = userData => {
+    let expireTime = 1 / 24; // 1 hour
+    Cookies.set("jwtToken", userData.token, { expires: expireTime });
     dispatch({
       type: "LOGIN",
       payload: userData
@@ -35,6 +49,7 @@ const AuthProvider = props => {
   };
 
   const logout = () => {
+    Cookies.remove("jwtToken");
     dispatch({
       type: "LOGOUT"
     });
