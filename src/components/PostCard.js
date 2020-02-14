@@ -34,7 +34,9 @@ const PostCard = props => {
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow(true)}
         </Card.Meta>
-        <Card.Description>{body}</Card.Description>
+        <Card.Description>
+          {body.length > 25 ? `${body.substring(0, 25)}...` : body}
+        </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <Button as="div" labelPosition="right" size="tiny" onClick={likePost}>

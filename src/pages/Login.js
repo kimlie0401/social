@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Form, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+import { AuthContext } from "../context/auth";
 import { useForm } from "../util/hooks";
 
 const Login = props => {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values } = useForm(loginUserCallBack, {
@@ -15,6 +18,7 @@ const Login = props => {
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, result) {
+      context.login(result.data.login);
       props.history.push("/");
     },
     onError(err) {
@@ -53,6 +57,10 @@ const Login = props => {
           Login
         </Button>
       </Form>
+      <div className="ui message" style={{ textAlign: "center" }}>
+        New to us?
+        <Link to="/register"> Sign Up</Link>
+      </div>
       {Object.keys(errors).length > 0 && (
         <div className="ui error message">
           <ul className="list">

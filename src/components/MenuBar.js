@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const MenuExampleSecondaryPointing = () => {
+import { AuthContext } from "../context/auth";
+
+const MenuBar = () => {
+  const { user, logout } = useContext(AuthContext);
   const pathname = window.location.pathname;
   // /about
 
@@ -13,7 +16,15 @@ const MenuExampleSecondaryPointing = () => {
     setActiveItem(data.name);
   };
 
-  return (
+  const menuBar = user ? (
+    <Menu pointing secondary size="large" color="teal">
+      <Menu.Item name={user.username} active={true} as={Link} to="/" />
+
+      <Menu.Menu position="right">
+        <Menu.Item name="logout" onClick={logout} />
+      </Menu.Menu>
+    </Menu>
+  ) : (
     <Menu pointing secondary size="large" color="teal">
       <Menu.Item
         name="home"
@@ -41,6 +52,8 @@ const MenuExampleSecondaryPointing = () => {
       </Menu.Menu>
     </Menu>
   );
+
+  return menuBar;
 };
 
-export default MenuExampleSecondaryPointing;
+export default MenuBar;
