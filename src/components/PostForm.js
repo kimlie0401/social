@@ -7,7 +7,7 @@ import { useForm } from "../util/hooks";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 
 const PostForm = () => {
-  const [errors, setErrors] = useState({});
+  //   const [errors, setErrors] = useState({});
   const { values, onChange, onSubmit } = useForm(createPostCallBack, {
     body: ""
   });
@@ -27,15 +27,13 @@ const PostForm = () => {
       values.body = "";
     },
     onError(err) {
-      setErrors(err.graphQLErrors[0].message);
+      //   setErrors(err.graphQLErrors[0].message);
     }
   });
 
   function createPostCallBack() {
     createPost();
   }
-
-  console.log(errors);
 
   return (
     <Fragment>
