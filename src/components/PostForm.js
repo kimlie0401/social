@@ -12,7 +12,7 @@ const PostForm = () => {
     body: ""
   });
 
-  const [createPost] = useMutation(CREATE_POST_MUTATION, {
+  const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(proxy, result) {
       const data = proxy.readQuery({
@@ -47,7 +47,7 @@ const PostForm = () => {
             name="body"
             onChange={onChange}
             value={values.body}
-            error={Object.keys(errors).length > 0 ? true : false}
+            error={error ? true : false}
           />
           <Button type="submit" color="teal">
             Submit
