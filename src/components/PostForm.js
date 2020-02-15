@@ -35,6 +35,8 @@ const PostForm = () => {
     createPost();
   }
 
+  console.log(errors);
+
   return (
     <Fragment>
       <Form onSubmit={onSubmit}>
