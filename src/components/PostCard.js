@@ -30,7 +30,7 @@ const PostCard = props => {
           size="mini"
           src="https://react.semantic-ui.com/images/avatar/large/molly.png"
         />
-        <Card.Header>{username}</Card.Header>
+        <Card.Header style={{ fontSize: "1rem" }}>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow(true)}
         </Card.Meta>
