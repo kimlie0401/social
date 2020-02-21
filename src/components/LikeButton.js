@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Icon, Label, Button } from "semantic-ui-react";
 
-const LikeButton = ({ user, post: { id, likeCount, likes } }) => {
+const LikeButton = ({ user: { user }, post: { id, likeCount, likes } }) => {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {

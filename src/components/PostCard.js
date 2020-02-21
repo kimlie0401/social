@@ -41,7 +41,7 @@ const PostCard = props => {
           <Button color="teal" basic size="tiny">
             <Icon name="comment" />
           </Button>
-          <Label as="a" basic color="teal" pointing="left" size="tiny">
+          <Label basic color="teal" pointing="left" size="tiny">
             {commentCount}
           </Label>
         </Button>

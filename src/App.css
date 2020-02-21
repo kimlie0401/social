@@ -9,3 +9,8 @@
   width: 350px;
   margin: auto;
 }
+
+.ui.red.tiny.button:focus,
+.ui.red.tiny.buttons .button:focus {
+  background-color: #db2828;
+}
