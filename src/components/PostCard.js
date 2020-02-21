@@ -1,7 +1,10 @@
-import React from "react";
-import { Card, Icon, Label, Image, Button } from "semantic-ui-react";
+import React, { useContext } from "react";
+import { Card, Icon, Label, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+
+import { AuthContext } from "../context/auth";
+import LikeButton from "./LikeButton";
 
 const PostCard = props => {
   const {
@@ -14,22 +17,16 @@ const PostCard = props => {
     likes
   } = props.post;
 
-  const likePost = () => {
-    alert("Like Post!");
-  };
-
-  const commentOnPost = () => {
-    alert("Comment Post");
-  };
+  const { user } = useContext(AuthContext);
 
   return (
     <Card fluid>
       <Card.Content>
-        <Image
+        {/* <Image
           floated="right"
           size="mini"
           src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-        />
+        /> */}
         <Card.Header style={{ fontSize: "1rem" }}>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow(true)}
@@ -39,20 +36,8 @@ const PostCard = props => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Button as="div" labelPosition="right" size="tiny" onClick={likePost}>
-          <Button color="red" basic size="tiny">
-            <Icon name="heart" />
-          </Button>
-          <Label as="a" basic color="red" pointing="left" size="tiny">
-            {likeCount}
-          </Label>
-        </Button>
-        <Button
-          as="div"
-          labelPosition="right"
-          size="tiny"
-          onClick={commentOnPost}
-        >
+        <LikeButton user={{ user }} post={{ id, likes, likeCount }} />
+        <Button labelPosition="right" size="tiny" as={Link} to={`/post/${id}`}>
           <Button color="teal" basic size="tiny">
             <Icon name="comment" />
           </Button>
@@ -60,6 +45,17 @@ const PostCard = props => {
             {commentCount}
           </Label>
         </Button>
+        {user && user.username === username && (
+          <Button
+            as="div"
+            color="red"
+            size="tiny"
+            floated="right"
+            onClick={() => alert("Delete Post")}
+          >
+            <Icon name="trash" style={{ margin: 0 }} />
+          </Button>
+        )}
       </Card.Content>
     </Card>
   );
