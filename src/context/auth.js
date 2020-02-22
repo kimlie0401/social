@@ -41,7 +41,10 @@ const AuthProvider = props => {
 
   const login = userData => {
     let expireTime = 1 / 24; // 1 hour
-    Cookies.set("jwtToken", userData.token, { expires: expireTime });
+    Cookies.set("jwtToken", userData.token, {
+      expires: expireTime,
+      sameSite: "lax"
+    });
     dispatch({
       type: "LOGIN",
       payload: userData
