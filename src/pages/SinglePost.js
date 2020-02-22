@@ -1,13 +1,16 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { Grid, Image, Card } from "semantic-ui-react";
+import { Grid, Image, Card, Button, Icon, Label } from "semantic-ui-react";
 import moment from "moment";
 
 import Loader from "../components/Loader";
+import LikeButton from "../components/LikeButton";
+import { AuthContext } from "../context/auth";
 
 const SinglePost = props => {
   const postId = props.match.params.postId;
+  const { user } = useContext(AuthContext);
 
   const [getPost, setPost] = useState({});
 
@@ -31,8 +34,8 @@ const SinglePost = props => {
     likeCount,
     commentCount
   } = getPost;
-  console.log(username);
-  let postMarkup = (
+
+  const postMarkup = (
     <Grid>
       <Grid.Row>
         <Grid.Column width={2}>
@@ -50,13 +53,29 @@ const SinglePost = props => {
               <Card.Description>{body}</Card.Description>
             </Card.Content>
             <hr />
+            <Card.Content extra>
+              <LikeButton user={{ user }} post={{ id, likeCount, likes }} />
+              <Button
+                as="div"
+                labelPosition="right"
+                onClick={() => alert("Comment")}
+                size="tiny"
+              >
+                <Button basic color="teal" size="tiny">
+                  <Icon name="comment" />
+                </Button>
+                <Label basic color="teal" pointing="left">
+                  {commentCount}
+                </Label>
+              </Button>
+            </Card.Content>
           </Card>
         </Grid.Column>
       </Grid.Row>
     </Grid>
   );
 
-  return <Fragment>{loading ? <Loader /> : <h1>Hello</h1>}</Fragment>;
+  return <Fragment>{loading ? <Loader /> : postMarkup}</Fragment>;
 };
 
 const FETCH_POST_QUERY = gql`
