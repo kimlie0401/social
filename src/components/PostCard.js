@@ -47,6 +47,8 @@ const PostCard = props => {
         </Button>
         {user && user.username === username && (
           <Button
+            basic
+            icon
             as="div"
             color="red"
             size="tiny"
