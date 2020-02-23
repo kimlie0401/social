@@ -43,7 +43,8 @@ const AuthProvider = props => {
     let expireTime = 1 / 24; // 1 hour
     Cookies.set("jwtToken", userData.token, {
       expires: expireTime,
-      sameSite: "lax"
+      sameSite: "lax",
+      secure: true
     });
     dispatch({
       type: "LOGIN",
