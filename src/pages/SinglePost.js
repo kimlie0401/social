@@ -7,6 +7,7 @@ import moment from "moment";
 import Loader from "../components/Loader";
 import LikeButton from "../components/LikeButton";
 import { AuthContext } from "../context/auth";
+import DeleteButton from "../components/DeleteButton";
 
 const SinglePost = props => {
   const postId = props.match.params.postId;
@@ -34,6 +35,10 @@ const SinglePost = props => {
     likeCount,
     commentCount
   } = getPost;
+
+  const deletePostCallback = () => {
+    props.history.push("/");
+  };
 
   const postMarkup = (
     <Grid>
@@ -68,6 +73,9 @@ const SinglePost = props => {
                   {commentCount}
                 </Label>
               </Button>
+              {user && user.username === username && (
+                <DeleteButton postId={id} callback={deletePostCallback} />
+              )}
             </Card.Content>
           </Card>
         </Grid.Column>
