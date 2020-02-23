@@ -43,13 +43,13 @@ const SinglePost = props => {
   const postMarkup = (
     <Grid>
       <Grid.Row>
-        <Grid.Column width={2}>
+        {/* <Grid.Column width={2}>
           <Image
             src="https://react.semantic-ui.com/images/avatar/large/molly.png"
             size="small"
             float="right"
           />
-        </Grid.Column>
+        </Grid.Column> */}
         <Grid.Column width={10}>
           <Card fluid>
             <Card.Content>
