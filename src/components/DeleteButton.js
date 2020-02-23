@@ -19,7 +19,7 @@ const DeleteButton = props => {
         query: FETCH_POSTS_QUERY,
         data: { getPosts: [...newPost] }
       });
-      //TODO: remove post from cache
+
       if (props.callback) props.callback();
     },
     variables: {
