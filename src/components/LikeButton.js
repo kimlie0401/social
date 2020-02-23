@@ -22,24 +22,24 @@ const LikeButton = ({ user: { user }, post: { id, likeCount, likes } }) => {
 
   const likeButton = user ? (
     liked ? (
-      <Button color="red" size="tiny">
+      <Button color="red" size="mini">
         <Icon name="heart" />
       </Button>
     ) : (
-      <Button color="red" size="tiny" basic>
+      <Button color="red" size="mini" basic>
         <Icon name="heart" />
       </Button>
     )
   ) : (
-    <Button as={Link} to="/login" color="red" size="tiny" basic>
+    <Button as={Link} to="/login" color="red" size="mini" basic>
       <Icon name="heart" />
     </Button>
   );
 
   return (
-    <Button as="div" labelPosition="right" size="tiny" onClick={likePost}>
+    <Button as="div" labelPosition="right" size="mini" onClick={likePost}>
       {likeButton}
-      <Label basic color="red" pointing="left" size="tiny">
+      <Label basic color="red" pointing="left" size="mini">
         {likeCount}
       </Label>
     </Button>

@@ -34,7 +34,7 @@ const DeleteButton = props => {
         icon
         as="div"
         color="red"
-        size="tiny"
+        size="mini"
         floated="right"
         onClick={() => setConfirmOpen(true)}
       >

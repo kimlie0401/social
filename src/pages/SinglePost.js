@@ -41,7 +41,7 @@ const SinglePost = props => {
   };
 
   const postMarkup = (
-    <Grid>
+    <Grid style={{ display: "flex", justifyContent: "center" }}>
       <Grid.Row>
         {/* <Grid.Column width={2}>
           <Image
