@@ -1,4 +1,10 @@
-import React, { useState, useEffect, Fragment, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  Fragment,
+  useContext,
+  useRef
+} from "react";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Grid, Card, Form, Button, Icon, Label } from "semantic-ui-react";
@@ -12,6 +18,7 @@ import DeleteButton from "../components/DeleteButton";
 const SinglePost = props => {
   const postId = props.match.params.postId;
   const { user } = useContext(AuthContext);
+  const commentInputRef = useRef(null);
 
   const [getPost, setPost] = useState({});
   const [comment, setComment] = useState("");
@@ -20,10 +27,12 @@ const SinglePost = props => {
     variables: { postId }
   });
 
-  const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
+  const [submitComment, { error }] = useMutation(SUBMIT_COMMENT_MUTATION, {
     update() {
       setComment("");
+      commentInputRef.current.blur();
     },
+    onError(err) {},
     variables: {
       postId,
       body: comment
@@ -101,6 +110,7 @@ const SinglePost = props => {
                       name="comment"
                       value={comment}
                       onChange={event => setComment(event.target.value)}
+                      ref={commentInputRef}
                     />
                     <button
                       className="ui button teal"
@@ -114,6 +124,13 @@ const SinglePost = props => {
                 </Form>
               </Card.Content>
             </Card>
+          )}
+          {error && (
+            <div className="ui error message" style={{ marginBottom: 20 }}>
+              <ul className="list">
+                {<li>{error.graphQLErrors[0].message}</li>}
+              </ul>
+            </div>
           )}
           {comments &&
             comments.map(comment => (
