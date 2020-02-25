@@ -2,9 +2,9 @@ import { Popup } from "semantic-ui-react";
 import React from "react";
 
 const style = {
-  borderRadius: 0,
+  //   borderRadius: 0,
   opacity: 0.7,
-  padding: "1em"
+  padding: "0.5rem"
 };
 
 const MyPopup = ({ content, children }) => {
