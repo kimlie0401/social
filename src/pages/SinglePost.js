@@ -14,6 +14,7 @@ import Loader from "../components/Loader";
 import LikeButton from "../components/LikeButton";
 import { AuthContext } from "../context/auth";
 import DeleteButton from "../components/DeleteButton";
+import MyPopup from "../util/MyPopup";
 
 const SinglePost = props => {
   const postId = props.match.params.postId;
@@ -70,7 +71,7 @@ const SinglePost = props => {
             float="right"
           />
         </Grid.Column> */}
-        <Grid.Column width={10}>
+        <Grid.Column width={15}>
           <Card fluid>
             <Card.Content>
               <Card.Header>{username}</Card.Header>
@@ -80,19 +81,21 @@ const SinglePost = props => {
             <hr />
             <Card.Content extra>
               <LikeButton user={{ user }} post={{ id, likeCount, likes }} />
-              <Button
-                as="div"
-                labelPosition="right"
-                onClick={() => alert("Comment")}
-                size="tiny"
-              >
-                <Button basic color="teal" size="tiny">
-                  <Icon name="comment" />
+              <MyPopup content="Comment on post">
+                <Button
+                  as="div"
+                  labelPosition="right"
+                  onClick={() => commentInputRef.current.focus()}
+                  size="tiny"
+                >
+                  <Button basic color="teal" size="tiny">
+                    <Icon name="comment" />
+                  </Button>
+                  <Label basic color="teal" pointing="left">
+                    {commentCount}
+                  </Label>
                 </Button>
-                <Label basic color="teal" pointing="left">
-                  {commentCount}
-                </Label>
-              </Button>
+              </MyPopup>
               {user && user.username === username && (
                 <DeleteButton postId={id} callback={deletePostCallback} />
               )}
