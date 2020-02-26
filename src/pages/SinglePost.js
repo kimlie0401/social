@@ -86,9 +86,9 @@ const SinglePost = props => {
                   as="div"
                   labelPosition="right"
                   onClick={() => commentInputRef.current.focus()}
-                  size="tiny"
+                  size="mini"
                 >
-                  <Button basic color="teal" size="tiny">
+                  <Button basic color="teal" size="mini">
                     <Icon name="comment" />
                   </Button>
                   <Label basic color="teal" pointing="left">
