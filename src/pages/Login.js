@@ -42,7 +42,7 @@ const Login = props => {
           <h1 style={{ color: "#00b5ad" }}>Login</h1>
           <Segment stacked>
             <Form.Input
-              label="Username"
+              // label="Username"
               placeholder="Username.."
               name="username"
               type="text"
@@ -54,7 +54,7 @@ const Login = props => {
               fluid
             />
             <Form.Input
-              label="Password"
+              // label="Password"
               placeholder="Password.."
               name="password"
               type="password"

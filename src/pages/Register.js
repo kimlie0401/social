@@ -43,7 +43,7 @@ const Register = props => {
           <h1 style={{ color: "#00b5ad" }}>Register</h1>
           <Segment stacked>
             <Form.Input
-              label="Username"
+              // label="Username"
               placeholder="Username.."
               name="username"
               type="text"
@@ -51,9 +51,11 @@ const Register = props => {
               error={errors.username ? true : false}
               onChange={onChange}
               fluid
+              icon="user"
+              iconPosition="left"
             />
             <Form.Input
-              label="Email"
+              // label="Email"
               placeholder="Email.."
               name="email"
               type="email"
@@ -61,9 +63,11 @@ const Register = props => {
               error={errors.email ? true : false}
               onChange={onChange}
               fluid
+              icon="mail"
+              iconPosition="left"
             />
             <Form.Input
-              label="Password"
+              // label="Password"
               placeholder="Password.."
               name="password"
               type="password"
@@ -71,9 +75,11 @@ const Register = props => {
               error={errors.password ? true : false}
               onChange={onChange}
               fluid
+              icon="lock"
+              iconPosition="left"
             />
             <Form.Input
-              label="Confirm Password"
+              // label="Confirm Password"
               placeholder="Confirm Password.."
               name="confirmPassword"
               type="password"
@@ -81,6 +87,8 @@ const Register = props => {
               error={errors.confirmPassword ? true : false}
               onChange={onChange}
               fluid
+              icon="lock"
+              iconPosition="left"
             />
             <Button
               type="submit"
