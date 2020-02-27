@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Segment, Grid } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
@@ -32,45 +32,61 @@ const Login = props => {
   }
 
   return (
-    <div className="form-container">
-      <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
-        <h1>Login</h1>
-        <Form.Input
-          label="Username"
-          placeholder="Username.."
-          name="username"
-          type="text"
-          value={values.username}
-          error={errors.username ? true : false}
-          onChange={onChange}
-        />
-        <Form.Input
-          label="Password"
-          placeholder="Password.."
-          name="password"
-          type="password"
-          value={values.password}
-          error={errors.password ? true : false}
-          onChange={onChange}
-        />
-        <Button type="submit" primary>
-          Login
-        </Button>
-      </Form>
-      <div className="ui message" style={{ textAlign: "center" }}>
-        New to us?
-        <Link to="/register"> Sign Up</Link>
-      </div>
-      {Object.keys(errors).length > 0 && (
-        <div className="ui error message">
-          <ul className="list">
-            {Object.values(errors).map(value => (
-              <li key={value}>{value}</li>
-            ))}
-          </ul>
+    <Grid textAlign="center" verticalAlign="middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Form
+          onSubmit={onSubmit}
+          noValidate
+          className={loading ? "loading" : ""}
+        >
+          <h1 style={{ color: "#2185d0" }}>Login</h1>
+          <Segment stacked>
+            <Form.Input
+              label="Username"
+              placeholder="Username.."
+              name="username"
+              type="text"
+              value={values.username}
+              error={errors.username ? true : false}
+              onChange={onChange}
+              icon="user"
+              iconPosition="left"
+              fluid
+            />
+            <Form.Input
+              label="Password"
+              placeholder="Password.."
+              name="password"
+              type="password"
+              value={values.password}
+              error={errors.password ? true : false}
+              onChange={onChange}
+              icon="lock"
+              iconPosition="left"
+              fluid
+            />
+            <Button type="submit" primary fluid>
+              Login
+            </Button>
+          </Segment>
+        </Form>
+
+        <div className="ui message" style={{ textAlign: "center" }}>
+          New to us?
+          <Link to="/register"> Sign Up</Link>
         </div>
-      )}
-    </div>
+
+        {Object.keys(errors).length > 0 && (
+          <div className="ui error message">
+            <ul className="list">
+              {Object.values(errors).map(value => (
+                <li key={value}>{value}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </Grid.Column>
+    </Grid>
   );
 };
 

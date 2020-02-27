@@ -42,7 +42,9 @@ const Home = props => {
 
   return (
     <>
-      <h1 className="page-title">Recent Posts</h1>
+      <h1 className="page-title" style={{ color: "#00b5ad" }}>
+        Recent Posts
+      </h1>
       <Grid columns={3} stackable>
         <Grid.Row>
           {user && (
