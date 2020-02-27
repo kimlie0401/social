@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Grid, Transition } from "semantic-ui-react";
+import gql from "graphql-tag";
 
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 import { AuthContext } from "../context/auth";
@@ -11,18 +12,33 @@ import PostForm from "../components/PostForm";
 const Home = props => {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
-  const { loading, data } = useQuery(FETCH_POSTS_QUERY);
+  const { loading, data, subscribeToMore } = useQuery(FETCH_POSTS_QUERY);
+
   useEffect(() => {
     if (data) {
       setPosts(data.getPosts);
     }
   }, [data]);
 
-  // let posts = "";
+  useEffect(() => {
+    subscribeToNewComments();
+  });
 
-  // if (data) {
-  //   posts = { data: data.getPosts };
-  // }
+  const subscribeToNewComments = () =>
+    subscribeToMore({
+      document: SUBSCRIPTION_QUERY,
+
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const newFeedItem = subscriptionData.data.newPost;
+        if (prev.getPosts.find(post => post.id === newFeedItem.id)) {
+          return prev;
+        }
+        return Object.assign({}, prev, {
+          getPosts: [newFeedItem, ...prev.getPosts]
+        });
+      }
+    });
 
   return (
     <>
@@ -51,5 +67,27 @@ const Home = props => {
     </>
   );
 };
+
+const SUBSCRIPTION_QUERY = gql`
+  subscription {
+    newPost {
+      id
+      body
+      createdAt
+      username
+      likeCount
+      likes {
+        username
+      }
+      commentCount
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+    }
+  }
+`;
 
 export default Home;

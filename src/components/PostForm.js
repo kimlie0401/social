@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 
 import { useForm } from "../util/hooks";
-import { FETCH_POSTS_QUERY } from "../util/graphql";
+// import { FETCH_POSTS_QUERY } from "../util/graphql";
 
 const PostForm = () => {
   //   const [errors, setErrors] = useState({});
@@ -15,16 +15,16 @@ const PostForm = () => {
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(proxy, result) {
-      const data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY
-      });
+      //   const data = proxy.readQuery({
+      //     query: FETCH_POSTS_QUERY
+      //   });
 
-      const new_post = result.data.createPost;
-      //   data.getPosts = [result.data.createPost, ...data.getPosts];
-      proxy.writeQuery({
-        query: FETCH_POSTS_QUERY,
-        data: { getPosts: [new_post, ...data.getPosts] }
-      });
+      //   const new_post = result.data.createPost;
+      //   //   data.getPosts = [result.data.createPost, ...data.getPosts];
+      //   proxy.writeQuery({
+      //     query: FETCH_POSTS_QUERY,
+      //     data: { getPosts: [new_post, ...data.getPosts] }
+      //   });
       values.body = "";
     },
     onError(err) {

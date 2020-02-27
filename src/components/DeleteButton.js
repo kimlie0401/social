@@ -32,7 +32,8 @@ const DeleteButton = props => {
     variables: {
       postId: props.postId,
       commentId: props.commentId
-    }
+    },
+    onError(err) {}
   });
 
   return (
