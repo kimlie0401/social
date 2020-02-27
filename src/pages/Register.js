@@ -40,7 +40,7 @@ const Register = props => {
           noValidate
           className={loading ? "loading" : ""}
         >
-          <h1 style={{ color: "#2185d0" }}>Register</h1>
+          <h1 style={{ color: "#00b5ad" }}>Register</h1>
           <Segment stacked>
             <Form.Input
               label="Username"
@@ -82,7 +82,12 @@ const Register = props => {
               onChange={onChange}
               fluid
             />
-            <Button type="submit" primary fluid>
+            <Button
+              type="submit"
+              primary
+              fluid
+              style={{ backgroundColor: "#00b5ad" }}
+            >
               Register
             </Button>
           </Segment>
