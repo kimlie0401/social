@@ -22,7 +22,7 @@ const PostCard = props => {
   const { user } = useContext(AuthContext);
 
   return (
-    <Card fluid>
+    <Card fluid color="teal">
       <Card.Content>
         {/* <Image
           floated="right"
