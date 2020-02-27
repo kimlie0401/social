@@ -24,7 +24,7 @@ const preAuthlink = setContext(() => {
 });
 
 const wsLink = new WebSocketLink({
-  uri: "ws://grapnel-apollo.herokuapp.com/graphql",
+  uri: "wss://grapnel-apollo.herokuapp.com/graphql",
   options: {
     reconnect: true,
     connectionParams: preAuthlink
