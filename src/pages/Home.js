@@ -53,7 +53,7 @@ const Home = props => {
           {loading ? (
             <Loader />
           ) : (
-            <Transition.Group>
+            <Transition.Group animation="scale">
               {posts &&
                 posts.map(post => (
                   <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
