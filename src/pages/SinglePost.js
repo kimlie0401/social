@@ -72,7 +72,7 @@ const SinglePost = props => {
           />
         </Grid.Column> */}
         <Grid.Column width={15}>
-          <Card fluid>
+          <Card fluid color="teal">
             <Card.Content>
               <Card.Header>{username}</Card.Header>
               <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
@@ -102,7 +102,7 @@ const SinglePost = props => {
             </Card.Content>
           </Card>
           {user && (
-            <Card fluid>
+            <Card fluid color="teal">
               <Card.Content>
                 <p>Post a comment:</p>
                 <Form>
@@ -137,7 +137,7 @@ const SinglePost = props => {
           )}
           {comments &&
             comments.map(comment => (
-              <Card fluid key={comment.id}>
+              <Card fluid key={comment.id} color="teal">
                 <Card.Content>
                   {user && user.username === comment.username && (
                     <DeleteButton postId={id} commentId={comment.id} />
